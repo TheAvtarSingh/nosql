@@ -1,0 +1,194 @@
+1. Create collection employees
+    {e_id : 101, e_name : "...", e_dept : "IT", e_salary : 45445, 
+     e_details : {city : "...", state : "...", phone : 90980909 },
+     e_prev_companies : ["TCS", "INFY", "WIPRO"]
+    }
+
+2. Find employees having salary greater than 50000.
+3. Find employees who lives in Delhi.
+4. Find employees who have worked earlier in INFY
+5. Find employees who belongs to IT department and has salary more than 50000
+6. Find employees who either lives in delhi or his previous company was TCS
+
+Solutions :
+Q1 . 
+> show dbs;
+admin            0.000GB
+config           0.000GB
+local            0.000GB
+ncu_db           0.000GB
+ncu_db_practice  0.000GB
+shopapp          0.000GB
+> use company;
+switched to db company
+> db.createCollection("employees");
+{ "ok" : 1 }
+> show collections;
+employees
+
+--------------------------------------Insert -----------------
+> db.employees.insertMany([
+...   {
+...     "e_id": 101,
+...     "e_name": "Naman",
+...     "e_dept": "IT",
+...     "e_salary": 45445,
+...     "e_details": { "city": "Delhi", "state": "Delhi", "phone": 90980909 },
+...     "e_prev_companies": ["TCS", "INFY", "WIPRO"]
+...   },
+...   {
+...     "e_id": 102,
+...     "e_name": "Shubham",
+...     "e_dept": "TECHNICAL",
+...     "e_salary": 40000,
+...     "e_details": { "city": "Panipat", "state": "Haryana", "phone": 96123456
+},
+...     "e_prev_companies": ["TCS", "INFY", "WIPRO"]
+...   },
+...   {
+...     "e_id": 103,
+...     "e_name": "Harit",
+...     "e_dept": "IT",
+...     "e_salary": 55000,
+...     "e_details": { "city": "Karnal", "state": "Haryana", "phone": 123457332
+},
+...     "e_prev_companies": ["TCS", "INFY", "WIPRO"]
+...   },
+...   {
+...     "e_id": 104,
+...     "e_name": "Anshit",
+...     "e_dept": "IT",
+...     "e_salary": 20000,
+...     "e_details": { "city": "Delhi", "state": "Delhi", "phone": 6483379 },
+...     "e_prev_companies": ["TCS", "INFY", "WIPRO"]
+...   },
+...   {
+...     "e_id": 105,
+...     "e_name": "Avtar Singh",
+...     "e_dept": "IT",
+...     "e_salary": 100000,
+...     "e_details": { "city": "Faridabad", "state": "Haryana", "phone": 8766244
+765 },
+...     "e_prev_companies": ["TCS", "INFY", "WIPRO"]
+...   }
+... ]
+... );
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6324203963e1f2dd2d00f13d"),
+                ObjectId("6324203963e1f2dd2d00f13e"),
+                ObjectId("6324203963e1f2dd2d00f13f"),
+                ObjectId("6324203963e1f2dd2d00f140"),
+                ObjectId("6324203963e1f2dd2d00f141")
+        ]
+}
+> db.employees.find().pretty();
+{
+        "_id" : ObjectId("6324203963e1f2dd2d00f13d"),
+        "e_id" : 101,
+        "e_name" : "Naman",
+        "e_dept" : "IT",
+        "e_salary" : 45445,
+        "e_details" : {
+                "city" : "Delhi",
+                "state" : "Delhi",
+                "phone" : 90980909
+        },
+        "e_prev_companies" : [
+                "TCS",
+                "INFY",
+                "WIPRO"
+        ]
+}
+{
+        "_id" : ObjectId("6324203963e1f2dd2d00f13e"),
+        "e_id" : 102,
+        "e_name" : "Shubham",
+        "e_dept" : "TECHNICAL",
+        "e_salary" : 40000,
+        "e_details" : {
+                "city" : "Panipat",
+                "state" : "Haryana",
+                "phone" : 96123456
+        },
+        "e_prev_companies" : [
+                "TCS",
+                "INFY",
+                "WIPRO"
+        ]
+}
+{
+        "_id" : ObjectId("6324203963e1f2dd2d00f13f"),
+        "e_id" : 103,
+        "e_name" : "Harit",
+        "e_dept" : "IT",
+        "e_salary" : 55000,
+        "e_details" : {
+                "city" : "Karnal",
+                "state" : "Haryana",
+                "phone" : 123457332
+        },
+        "e_prev_companies" : [
+                "TCS",
+                "INFY",
+                "WIPRO"
+        ]
+}
+{
+        "_id" : ObjectId("6324203963e1f2dd2d00f140"),
+        "e_id" : 104,
+        "e_name" : "Anshit",
+        "e_dept" : "IT",
+        "e_salary" : 20000,
+        "e_details" : {
+                "city" : "Delhi",
+                "state" : "Delhi",
+                "phone" : 6483379
+        },
+        "e_prev_companies" : [
+                "TCS",
+                "INFY",
+                "WIPRO"
+        ]
+}
+{
+        "_id" : ObjectId("6324203963e1f2dd2d00f141"),
+        "e_id" : 105,
+        "e_name" : "Avtar Singh",
+        "e_dept" : "IT",
+        "e_salary" : 100000,
+        "e_details" : {
+                "city" : "Faridabad",
+                "state" : "Haryana",
+                "phone" : 8766244765
+        },
+        "e_prev_companies" : [
+                "TCS",
+                "INFY",
+                "WIPRO"
+        ]
+}
+----------------------------------------------------------
+
+
+Q2. Find employees having salary greater than 50000.
+> db.employees.find({"e_salary":{$gt:5000}}).pretty();
+
+
+Q3. Find employees who lives in Delhi.
+> db.employees.find({"e_details.city":{$in:["Delhi"]}}).pretty();
+
+
+Q4. Find employees who have worked earlier in INFY
+> db.employees.find({"e_prev_companies":{$in:["INFY"]}}).pretty();
+
+
+Q5. Find employees who belongs to IT department and has salary more than 50000
+> db.employees.find({$and:[{"e_dept":"IT"},{e_salary:{$gt:50000}}]}).pretty();
+
+
+Q6. Find employees who either lives in delhi or his previous company was TCS
+> db.employees.find({$or:[{"e_details.city":{$in:["Delhi"]}},{"e_prev_companies":{$in:["TCS"]}}]}).pretty();
+
+----------------------------------------------------------
