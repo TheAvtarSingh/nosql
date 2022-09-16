@@ -128,4 +128,96 @@ db.products.insertMany([
         "discount" : 5
     }
 ]);
-Output : 
+
+Update -- Only Update First One
+> db.products.update({"p_brand":"Apple"},{$set : {"discount" : 3}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+Update --  With No arguement -- Update All
+> db.products.update({},{$set : {"discount" : 4}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+Or Use 
+
+updateMany - - Update all occurences
+> db.products.updateMany({"p_brand" : "Apple"},{$set : {"rating" : 4.5}});
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 1 }
+> db.products.find().pretty();
+
+DeleteOne() -- db.products.deleteOne({"p_brand" : "Titan"}; // delete First Occurance
+Similarly - DeleteMany() for Multiple Deletes
+
+Operators
+1. Projection Operators 
+-- $,$elemMatch ,$meta,$slice
+( db.products.find({"p_brand":"Apple"},{"p_name:1","p_price":1}).pretty(); )
+> db.products.find({"p_brand":"Apple"},{"p_name":1,"p_price":1,_id:0,"p_details.color":1}).pretty();
+Array
+> db.products.findOne({"p_brand":"Puma"}).offers;
+[ "offer_1", "offer_2", "offer_3" ]
+
+> db.products.findOne({"p_brand":"Puma"}).offers[1];
+offer_2
+
+> db.products.findOne({"p_brand":"Puma"}).p_details.size;
+[ 7, 8, 9, 10 ]
+
+
+2. Comparision
+-- $eq,ne,gt,gte,lt,lte,in,nin
+
+--eq
+> db.products.find({"p_brand":{$eq:"Apple"}},{"p_name":1,"p_price":1,_id:0,"p_de
+tails.color":1}).pretty();
+ne :
+> db.products.find({"p_brand":{$ne:"Apple"}},{"p_name":1,"p_price":1,_id:0,"p_de
+tails.color":1}).pretty();
+gt
+> db.products.find({"p_price":{$gt:5000}},{"p_name":1,"p_price":1,_id:0,"p_detai
+ls.color":1}).pretty();
+--le
+> db.products.find({"p_price":{$lt:5000}},{"p_name":1,"p_price":1,_id:0,"p_detai
+ls.color":1}).pretty();
+
+--in (we just have to pass an array with values not every time key)
+(Filter Multiple)
+> db.products.find({"p_brand":{$in:["Puma","Apple"]}},{"p_name":1,"p_price":1,_i
+d:0,"p_details.color":1}).pretty();
+//Inside array 
+> db.products.find({"p_details.color":{$in:["red"]}},{"p_name":1,"p_price":1,_id
+:0,"p_details.color":1}).pretty();
+//Works as $OR
+> db.products.find({"p_details.color":{$in:["white","red"]}},{"p_name":1,"p_pric
+e":1,_id:0,"p_details.color":1}).pretty();
+
+
+--nin 
+> db.products.find({"p_details.color":{$nin:["white","red"]}},{"p_name":1,"p_pri
+ce":1,_id:0,"p_details.color":1}).pretty();
+
+Note : Condition On aArray : not works as details.size
+
+
+3. Logical
+-- $and , or ,not , nor
+--or
+> db.products.find({$or:[{"p_brand":"Apple"},{p_price:{$lt:10000}}]},{"p_name":1,"p_price":1,"p_brand":1}).pretty();
+--and 
+> db.products.find({$and:[{"p_brand":"Apple"},{p_price:{$gt:10000}}]},{"p_name":
+1,"p_price":1,"p_brand":1}).pretty();
+--Nor
+> db.products.find({$nor:[{"p_brand":"Apple"},{p_price:{$gt:10000}}]},{"p_name":
+1,"p_price":1,"p_brand":1}).pretty();
+
+--Not (We use nin in this case)
+> db.products.find({$not:[{"p_brand":"Apple"},{p_price:{$gt:10000}}]},{"p_name":
+1,"p_price":1,"p_brand":1}).pretty();
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "unknown top level operator: $not",
+        "code" : 2,
+        "codeName" : "BadValue"
+        
+4. Element
+-- $exists,type
+5. Evaluation
+-- $expr (regix) , regex,text,mod,where
