@@ -221,3 +221,7 @@ Error: error: {
 -- $exists,type
 5. Evaluation
 -- $expr (regix) , regex,text,mod,where
+
+
+----- .skip() - To skip some results
+----- .limit() - to limit the results
