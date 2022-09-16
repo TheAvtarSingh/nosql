@@ -1,0 +1,131 @@
+Collections
+
+{
+key : value
+key : [v1,v2,v3]
+key : {key : value , key,[]}
+key : [{k:v},{k:v}]
+}
+
+db.createCollection("name");
+
+
+
+//Simple Collection 
+> show dbs;
+admin            0.000GB
+config           0.000GB
+local            0.000GB
+ncu_db           0.000GB
+ncu_db_practice  0.000GB
+> use shopapp;
+switched to db shopapp
+> show collections;
+> db.createCollection("products");
+{ "ok" : 1 }
+> show collections;
+products
+>
+
+
+db.createCollection("name",options);
+Capped Collection - used to restict data
+capped: true,
+size : int(bytes) //size of collection ( in size : 5 , if 6th is inserted then 1st will be deleted)
+max : int, // max documnets allowed in our collection ( in max : 5 , if 6th is inserted then 1st will be deleted)
+AutoIndexId: automaticallly creates index on id field
+
+
+Data Types
+BSON : https://www.mongodb.com/docs/manual/reference/bson-types/
+Note : Datatype of _id : ObjectId();
+
+For Number : Only Double ( it will complete by own)
+45.00 == 45
+45.55 == 45.55
+
+boolean
+null
+array
+string
+minkey
+maxkey
+
+
+CRUD - Crete , Read , Update and Delete
+
+CREATE : 
+insertOne,insertMany
+Read :
+find(),findOne()
+Update : 
+updateOne(),updateMany(),replace
+Delete :
+deleteOne(),deleteMany()
+
+//Inserting Query 
+db.products.insertMany([
+    {
+        "p_name" : "Apple Iphone 13",
+        "p_price" : 80000,
+        "p_brand" : "Apple",
+        "p_category" : "Mobile",
+        "p_details" : {
+            "ram" : ["4 GB","8 GB", "16 GB"],
+            "memory" : ["64 GB", "128 GB"],
+            "color" : ["white", "gray", "silver", "gold"]
+        },
+        "discount" : 5
+    },
+
+    {
+        "p_name" : "Apple Macbook Pro",
+        "p_price" : 150000,
+        "p_brand" : "Apple",
+        "p_category" : "Laptop",
+        "p_details" : {
+            "ram" : ["8 GB", "16 GB", "32 GB"],
+            "memory" : ["256 GB", "512 GB"],
+            "color" : ["gray", "silver"]
+        }
+    },
+
+    {
+        "p_name" : "Adidas Shoes",
+        "p_price" : 4000,
+        "p_brand" : "Adidas",
+        "p_category" : "Shoes",
+        "p_details" : {
+            "size" : [7,8,9,10],
+            "color" : ["white", "gray", "black", "red"]
+        },
+        "discount" : 3,
+        "offers" : ["offer_1", "offer_2", "offer_3"]
+    },
+
+    {
+        "p_name" : "Puma Shoes",
+        "p_price" : 3500,
+        "p_brand" : "Puma",
+        "p_category" : "Shoes",
+        "p_details" : {
+            "size" : [7,8,9,10],
+            "color" : ["white", "gray", "black"]
+        },
+        "discount" : 5,
+        "offers" : ["offer_1", "offer_2", "offer_3"]
+    },
+
+    {
+        "p_name" : "Titan Smart Watch",
+        "p_price" : 8000,
+        "p_brand" : "Titan",
+        "p_category" : "Watch",
+        "p_details" : {
+            "features" : ["heartbeat", "steps", "calories", "BMI"],
+            "color" : ["white", "gray", "silver", "black", "pink"]
+        },
+        "discount" : 5
+    }
+]);
+Output : 
