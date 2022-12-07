@@ -1,0 +1,340 @@
+             
+             
+             .....Change the Condition according to the need.....
+
+
+
+Exercise : 1
+Create a database for movies
+   - Collection - movies
+   - Collection - users
+
+Movies Collection
+- name, imdb_rating, release date, genres : [], 
+  description : {summary : "...", star : [], directors : []}
+  release_date : new Date("2021-8-12")
+- Insert at least 10 documents
+
+Users Collection
+- name, emailId, 
+  movies_watched : {count : 2, names : ["Avengers", "Thor"],
+                    "rating" : [7.8, 8.9],
+                    "review" : ["Good", "Amazing"]}
+
+- Insert at least 5 documents
+
+Queries
+Q1.  Find all movies directed by "XYZ".
+
+OUTPUT : 
+{ _id: ObjectId("63518fe4d6baec4ce1f1671f"),
+  name: 'name1',
+  imdb_rating: 5,
+  release_date: 2021-08-13T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2' ],
+  description: 
+   { summary: 'Mast Movie',
+     star: [ 5 ],
+     directors: [ 'director1', 'director2' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16720"),
+  name: 'name2',
+  imdb_rating: 7,
+  release_date: 2020-08-13T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2' ],
+  description: 
+   { summary: 'Great Movie',
+     star: [ 3 ],
+     directors: [ 'director2', 'director1' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16722"),
+  name: 'name4',
+  imdb_rating: 6,
+  release_date: 2019-12-03T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2', 'gener_2' ],
+  description: 
+   { summary: 'Should Watch',
+     star: [ 5 ],
+     directors: [ 'director1' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16721"),
+  name: 'name3',
+  imdb_rating: 2,
+  release_date: 2021-09-13T00:00:00.000Z,
+  genres: [ 'gener_2', 'gener_2' ],
+  description: 
+   { summary: 'Going to watch',
+     star: [ 8 ],
+     directors: [ 'director1', 'director2', 'director3' ] } }
+
+
+
+Q2. Find movies whose rating is above 8.0
+
+db.movies.aggregate([{$match:{imdb_rating:{$gt:4}}}])
+
+Output : 
+
+{ _id: ObjectId("63518fe4d6baec4ce1f1671f"),
+  name: 'name1',
+  imdb_rating: 5,
+  release_date: 2021-08-13T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2' ],
+  description: 
+   { summary: 'Mast Movie',
+     star: [ 5 ],
+     directors: [ 'director1', 'director2' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16720"),
+  name: 'name2',
+  imdb_rating: 7,
+  release_date: 2020-08-13T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2' ],
+  description: 
+   { summary: 'Great Movie',
+     star: [ 3 ],
+     directors: [ 'director2', 'director1' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16722"),
+  name: 'name4',
+  imdb_rating: 6,
+  release_date: 2019-12-03T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2', 'gener_2' ],
+  description: 
+   { summary: 'Should Watch',
+     star: [ 5 ],
+     directors: [ 'director1' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16723"),
+  name: 'name5',
+  imdb_rating: 5,
+  release_date: 2020-11-08T00:00:00.000Z,
+  genres: [ 'gener_2' ],
+  description: 
+   { summary: 'Romantic Movie',
+     star: [ 2 ],
+     directors: [ 'director2' ] } }
+
+Q3. Find movies whose genre is action and comedy
+
+db.movies.aggregate([{$match:{$and:[{genres:"gener_1"},{genres:"gener_2"}]}}])
+
+Output : 
+
+{ _id: ObjectId("63518fe4d6baec4ce1f1671f"),
+  name: 'name1',
+  imdb_rating: 5,
+  release_date: 2021-08-13T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2' ],
+  description: 
+   { summary: 'Mast Movie',
+     star: [ 5 ],
+     directors: [ 'director1', 'director2' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16720"),
+  name: 'name2',
+  imdb_rating: 7,
+  release_date: 2020-08-13T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2' ],
+  description: 
+   { summary: 'Great Movie',
+     star: [ 3 ],
+     directors: [ 'director2', 'director1' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16722"),
+  name: 'name4',
+  imdb_rating: 6,
+  release_date: 2019-12-03T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2', 'gener_2' ],
+  description: 
+   { summary: 'Should Watch',
+     star: [ 5 ],
+     directors: [ 'director1' ] } }
+
+
+Q4. Find movies whose genre is only action
+
+db.movies.aggregate([{$match:{$and:[{genres:"gener_1"}]}}])
+
+OUTPUT :
+
+{ _id: ObjectId("63518fe4d6baec4ce1f1671f"),
+  name: 'name1',
+  imdb_rating: 5,
+  release_date: 2021-08-13T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2' ],
+  description: 
+   { summary: 'Mast Movie',
+     star: [ 5 ],
+     directors: [ 'director1', 'director2' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16720"),
+  name: 'name2',
+  imdb_rating: 7,
+  release_date: 2020-08-13T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2' ],
+  description: 
+   { summary: 'Great Movie',
+     star: [ 3 ],
+     directors: [ 'director2', 'director1' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16722"),
+  name: 'name4',
+  imdb_rating: 6,
+  release_date: 2019-12-03T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2', 'gener_2' ],
+  description: 
+   { summary: 'Should Watch',
+     star: [ 5 ],
+     directors: [ 'director1' ] } }
+
+Q5. Find movies whose review contains positive(good/best/awesome..) words  
+
+
+db.users.aggregate([{$match:{"movies_watched.review":{$in:["Good","Moderate"]}}}]);
+
+
+{ _id: ObjectId("6351942fd6baec4ce1f16725"),
+  name: 'user2',
+  emailid: 'user2@gmail.com',
+  movies_watched: 
+   { count: 3,
+     names: [ 'name3', 'name4', 'name5' ],
+     ratings: [ 2, 6, 5 ],
+     review: [ 'Good', 'Bad', 'Moderate' ] } }
+{ _id: ObjectId("6351942fd6baec4ce1f16728"),
+  name: 'user5',
+  emailid: 'user5@gmail.com',
+  movies_watched: 
+   { count: 1,
+     names: [ 'name4' ],
+     ratings: [ 6 ],
+     review: [ 'Moderate' ] } }
+{ _id: ObjectId("6351942fd6baec4ce1f16726"),
+  name: 'user3',
+  emailid: 'user3@gmail.com',
+  movies_watched: 
+   { count: 3,
+     names: [ 'name3' ],
+     ratings: [ 2 ],
+     review: [ 'Good' ] } }
+
+Q6. Find users who has watched more than 2 movies
+
+
+db.users.aggregate([{$match:{"movies_watched.count":{$gt:2}}}]);
+
+OUTPUT :
+{ _id: ObjectId("6351942fd6baec4ce1f16725"),
+  name: 'user2',
+  emailid: 'user2@gmail.com',
+  movies_watched: 
+   { count: 3,
+     names: [ 'name3', 'name4', 'name5' ],
+     ratings: [ 2, 6, 5 ],
+     review: [ 'Good', 'Bad', 'Moderate' ] } }
+{ _id: ObjectId("6351942fd6baec4ce1f16726"),
+  name: 'user3',
+  emailid: 'user3@gmail.com',
+  movies_watched: 
+   { count: 3,
+     names: [ 'name3' ],
+     ratings: [ 2 ],
+     review: [ 'Good' ] } }
+
+Q7. Find users who has given 8 rating to Avengers Movies
+
+db.users.aggregate([{$match:{$and:[{"movies_watched.names":{$in:["name3"]}},{"movies_watched.ratings":{$in:[2]}}]}}]);
+
+Output :
+{ _id: ObjectId("6351942fd6baec4ce1f16725"),
+  name: 'user2',
+  emailid: 'user2@gmail.com',
+  movies_watched: 
+   { count: 3,
+     names: [ 'name3', 'name4', 'name5' ],
+     ratings: [ 2, 6, 5 ],
+     review: [ 'Good', 'Bad', 'Moderate' ] } }
+{ _id: ObjectId("6351942fd6baec4ce1f16726"),
+  name: 'user3',
+  emailid: 'user3@gmail.com',
+  movies_watched: 
+   { count: 3,
+     names: [ 'name3' ],
+     ratings: [ 2 ],
+     review: [ 'Good' ] } }
+
+Q8. Find users who has watched only 1 movie till now.
+
+
+db.users.aggregate([{$match:{"movies_watched.count":{$eq:2}}}]);
+db.users.aggregate([{$match:{"movies_watched.count":{$eq:3}}}]);
+
+OUTPUT :
+
+{ _id: ObjectId("6351942fd6baec4ce1f16725"),
+  name: 'user2',
+  emailid: 'user2@gmail.com',
+  movies_watched: 
+   { count: 3,
+     names: [ 'name3', 'name4', 'name5' ],
+     ratings: [ 2, 6, 5 ],
+     review: [ 'Good', 'Bad', 'Moderate' ] } }
+{ _id: ObjectId("6351942fd6baec4ce1f16726"),
+  name: 'user3',
+  emailid: 'user3@gmail.com',
+  movies_watched: 
+   { count: 3,
+     names: [ 'name3' ],
+     ratings: [ 2 ],
+     review: [ 'Good' ] } }
+
+
+Q9. Find movies whose imdb rating is not greater than 8
+
+db.movies.aggregate([{$match:{"imdb_rating":{$lt:8}}}]);
+
+Output :
+
+{ _id: ObjectId("63518fe4d6baec4ce1f1671f"),
+  name: 'name1',
+  imdb_rating: 5,
+  release_date: 2021-08-13T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2' ],
+  description: 
+   { summary: 'Mast Movie',
+     star: [ 5 ],
+     directors: [ 'director1', 'director2' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16720"),
+  name: 'name2',
+  imdb_rating: 7,
+  release_date: 2020-08-13T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2' ],
+  description: 
+   { summary: 'Great Movie',
+     star: [ 3 ],
+     directors: [ 'director2', 'director1' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16722"),
+  name: 'name4',
+  imdb_rating: 6,
+  release_date: 2019-12-03T00:00:00.000Z,
+  genres: [ 'gener_1', 'gener_2', 'gener_2' ],
+  description: 
+   { summary: 'Should Watch',
+     star: [ 5 ],
+     directors: [ 'director1' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16723"),
+  name: 'name5',
+  imdb_rating: 5,
+  release_date: 2020-11-08T00:00:00.000Z,
+  genres: [ 'gener_2' ],
+  description: 
+   { summary: 'Romantic Movie',
+     star: [ 2 ],
+     directors: [ 'director2' ] } }
+{ _id: ObjectId("6351920bd6baec4ce1f16721"),
+  name: 'name3',
+  imdb_rating: 2,
+  release_date: 2021-09-13T00:00:00.000Z,
+  genres: [ 'gener_2', 'gener_2' ],
+  description: 
+   { summary: 'Going to watch',
+     star: [ 8 ],
+     directors: [ 'director1', 'director2', 'director3' ] } }
+
+
+Q10. Find movies where either imdb rating is above 8 or genre is action
+
+
+
+Output :

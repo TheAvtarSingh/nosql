@@ -1,0 +1,42 @@
+[
+  {
+    "e_id": 101,
+    "e_name": "Naman",
+    "e_dept": "IT",
+    "e_salary": 45445,
+    "e_details": { "city": "Delhi", "state": "Delhi", "phone": 90980909 },
+    "e_prev_companies": ["TCS", "INFY", "WIPRO"]
+  },
+  {
+    "e_id": 102,
+    "e_name": "Shubham",
+    "e_dept": "TECHNICAL",
+    "e_salary": 40000,
+    "e_details": { "city": "Panipat", "state": "Haryana", "phone": 96123456 },
+    "e_prev_companies": ["TCS", "INFY", "WIPRO"]
+  },
+  {
+    "e_id": 103,
+    "e_name": "Harit",
+    "e_dept": "IT",
+    "e_salary": 55000,
+    "e_details": { "city": "Karnal", "state": "Haryana", "phone": 123457332 },
+    "e_prev_companies": ["TCS", "INFY", "WIPRO"]
+  },
+  {
+    "e_id": 104,
+    "e_name": "Anshit",
+    "e_dept": "IT",
+    "e_salary": 20000,
+    "e_details": { "city": "Delhi", "state": "Delhi", "phone": 6483379 },
+    "e_prev_companies": ["TCS", "INFY", "WIPRO"]
+  },
+  {
+    "e_id": 105,
+    "e_name": "Avtar Singh",
+    "e_dept": "IT",
+    "e_salary": 100000,
+    "e_details": { "city": "Faridabad", "state": "Haryana", "phone": 8766244765 },
+    "e_prev_companies": ["TCS", "INFY", "WIPRO"]
+  }
+]

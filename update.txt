@@ -1,0 +1,176 @@
+
+> show dbs
+admin            0.000GB
+config           0.000GB
+local            0.000GB
+ncu_db           0.000GB
+ncu_db_practice  0.000GB
+> use ncu_db_practice;
+switched to db ncu_db_practice
+> show collections
+students
+> db.students.find().pretty();
+{
+        "_id" : ObjectId("62ed3e4aff995b5b62537e7c"),
+        "name" : "Avtar",
+        "age" : 21,
+        "email" : "avtar20csu241@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed3e96ff995b5b62537e7d"),
+        "name" : "Sunil",
+        "age" : 22,
+        "email" : "sunil20csu371@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7e"),
+        "name" : "Harit",
+        "roll_no" : "20csu241",
+        "section" : "FSB",
+        "gender" : "Male",
+        "address" : {
+                "house_no" : "688",
+                "apartment" : "Aujla Apartments",
+                "city" : "Rohini",
+                "state" : "Delhi",
+                "country" : "India"
+        }
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7f"),
+        "name" : "Anshit",
+        "roll_no" : "20csu188",
+        "section" : "FSB",
+        "gender" : "Male",
+        "hobbies" : [
+                "Cricket",
+                "Music"
+        ]
+}
+> db.students.update({name:"Sunil"},{$set :{age:21}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty();
+{
+        "_id" : ObjectId("62ed3e4aff995b5b62537e7c"),
+        "name" : "Avtar",
+        "age" : 21,
+        "email" : "avtar20csu241@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed3e96ff995b5b62537e7d"),
+        "name" : "Sunil",
+        "age" : 21,
+        "email" : "sunil20csu371@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7e"),
+        "name" : "Harit",
+        "roll_no" : "20csu241",
+        "section" : "FSB",
+        "gender" : "Male",
+        "address" : {
+                "house_no" : "688",
+                "apartment" : "Aujla Apartments",
+                "city" : "Rohini",
+                "state" : "Delhi",
+                "country" : "India"
+        }
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7f"),
+        "name" : "Anshit",
+        "roll_no" : "20csu188",
+        "section" : "FSB",
+        "gender" : "Male",
+        "hobbies" : [
+                "Cricket",
+                "Music"
+        ]
+}
+> db.students.update({name:"Harit"},{$set :{address.city:"Delhi"}});
+2022-08-05T21:51:49.177+0530 E  QUERY    [js] uncaught exception: SyntaxError:
+issing : after property id :
+@(shell):1:49
+> db.students.update({name:"Harit"},{$set :{hobbies:"Music"}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty();
+{
+        "_id" : ObjectId("62ed3e4aff995b5b62537e7c"),
+        "name" : "Avtar",
+        "age" : 21,
+        "email" : "avtar20csu241@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed3e96ff995b5b62537e7d"),
+        "name" : "Sunil",
+        "age" : 21,
+        "email" : "sunil20csu371@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7e"),
+        "name" : "Harit",
+        "roll_no" : "20csu241",
+        "section" : "FSB",
+        "gender" : "Male",
+        "address" : {
+                "house_no" : "688",
+                "apartment" : "Aujla Apartments",
+                "city" : "Rohini",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : "Music"
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7f"),
+        "name" : "Anshit",
+        "roll_no" : "20csu188",
+        "section" : "FSB",
+        "gender" : "Male",
+        "hobbies" : [
+                "Cricket",
+                "Music"
+        ]
+}
+> db.students.update({name:"Harit"},{$set :{"address.city":"Delhi"}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty();
+{
+        "_id" : ObjectId("62ed3e4aff995b5b62537e7c"),
+        "name" : "Avtar",
+        "age" : 21,
+        "email" : "avtar20csu241@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed3e96ff995b5b62537e7d"),
+        "name" : "Sunil",
+        "age" : 21,
+        "email" : "sunil20csu371@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7e"),
+        "name" : "Harit",
+        "roll_no" : "20csu241",
+        "section" : "FSB",
+        "gender" : "Male",
+        "address" : {
+                "house_no" : "688",
+                "apartment" : "Aujla Apartments",
+                "city" : "Delhi",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : "Music"
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7f"),
+        "name" : "Anshit",
+        "roll_no" : "20csu188",
+        "section" : "FSB",
+        "gender" : "Male",
+        "hobbies" : [
+                "Cricket",
+                "Music"
+        ]
+}
+>

@@ -1,0 +1,3 @@
+}
+> db.students.deleteOne({name:"Sunil"});
+{ "acknowledged" : true, "deletedCount" : 1 }

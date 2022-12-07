@@ -1,0 +1,55 @@
+[
+    {
+        "name": "name2",
+        "imdb_rating":7,
+
+        "release_date": new Date("2020-08-13"),
+        "genres":["gener_1","gener_2"],
+        "description":{
+            "summary":"Great Movie",
+            "star":[3],
+            "directors":["director2","director1"]
+        }
+
+    },
+    {
+        "name": "name3",
+        "imdb_rating":2,
+
+        "release_date": new Date("2021-09-13"),
+        "genres":["gener_2","gener_2"],
+        "description":{
+            "summary":"Going to watch",
+            "star":[8],
+            "directors":["director1","director2","director3"]
+        }
+
+    },
+    {
+        "name": "name4",
+        "imdb_rating":6,
+
+        "release_date": new Date("2019-12-03"),
+        "genres":["gener_1","gener_2","gener_2"],
+        "description":{
+            "summary":"Should Watch",
+            "star":[5],
+            "directors":["director1"]
+        }
+
+    },
+    {
+        "name": "name5",
+        "imdb_rating":5,
+
+        "release_date": new Date("2020-11-08"),
+        "genres":["gener_2"],
+        "description":{
+            "summary":"Romantic Movie",
+            "star":[2],
+            "directors":["director2"]
+        }
+
+    }
+    
+]

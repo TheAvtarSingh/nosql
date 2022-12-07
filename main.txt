@@ -1,0 +1,213 @@
+
+> show dbs;
+admin            0.000GB
+config           0.000GB
+local            0.000GB
+ncu_db           0.000GB
+ncu_db_practice  0.000GB
+> use shopapp;
+switched to db shopapp
+> show collections;
+> db.createCollection("products");
+{ "ok" : 1 }
+> show collections;
+products
+> db.createCollection("top_5_customers",{capped:true,size:1024,max:5});
+{ "ok" : 1 }
+> show collections;
+products
+top_5_customers
+> db.top_5_customers.insertOne({name:"john",email:"john23@gmail.com"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6323fed263e1f2dd2d00f12c")
+}
+> db.top_5_customers.insertOne({name:"john",email:"john23@gmail.com"});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6324017c63e1f2dd2d00f12d")
+}
+> db.createCollection("users");
+{ "ok" : 1 }
+> db.users.insertOne({name : "Ram",age:20,salary:45000.00,eligible:ture});
+2022-09-16T10:25:55.420+0530 E  QUERY    [js] uncaught exception: ReferenceError
+: ture is not defined :
+@(shell):1:57
+> db.users.insertOne({name : "Ram",age:20,salary:45000.00,eligible:true});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("632401e263e1f2dd2d00f12e")
+}
+> db.users.find();
+{ "_id" : ObjectId("632401e263e1f2dd2d00f12e"), "name" : "Ram", "age" : 20, "sal
+ary" : 45000, "eligible" : true }
+> db.users.find().preety;
+> db.users.insertOne({name : "Shyam",age:22,salary:45000.55,eligible:true});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6324021063e1f2dd2d00f12f")
+}
+> db.users.find();
+{ "_id" : ObjectId("632401e263e1f2dd2d00f12e"), "name" : "Ram", "age" : 20, "sal
+ary" : 45000, "eligible" : true }
+{ "_id" : ObjectId("6324021063e1f2dd2d00f12f"), "name" : "Shyam", "age" : 22, "s
+alary" : 45000.55, "eligible" : true }
+> db.users.find().pretty;
+function() {
+    this._prettyShell = true;
+    return this;
+}
+> db.users.find().pretty();
+{
+        "_id" : ObjectId("632401e263e1f2dd2d00f12e"),
+        "name" : "Ram",
+        "age" : 20,
+        "salary" : 45000,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("6324021063e1f2dd2d00f12f"),
+        "name" : "Shyam",
+        "age" : 22,
+        "salary" : 45000.55,
+        "eligible" : true
+}
+> db.users.insertOne({name : "Kunal",age:23,dept:null,salary:45000.55,eligible:t
+rue});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("6324026d63e1f2dd2d00f130")
+}
+> db.users.find().pretty();
+{
+        "_id" : ObjectId("632401e263e1f2dd2d00f12e"),
+        "name" : "Ram",
+        "age" : 20,
+        "salary" : 45000,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("6324021063e1f2dd2d00f12f"),
+        "name" : "Shyam",
+        "age" : 22,
+        "salary" : 45000.55,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("6324026d63e1f2dd2d00f130"),
+        "name" : "Kunal",
+        "age" : 23,
+        "dept" : null,
+        "salary" : 45000.55,
+        "eligible" : true
+}
+> db.users.insertOne({name : "Sunil",age:23,salary:55000.55,address:["Delhi","No
+ida"]});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("632402ac63e1f2dd2d00f131")
+}
+> db.users.find().pretty();
+{
+        "_id" : ObjectId("632401e263e1f2dd2d00f12e"),
+        "name" : "Ram",
+        "age" : 20,
+        "salary" : 45000,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("6324021063e1f2dd2d00f12f"),
+        "name" : "Shyam",
+        "age" : 22,
+        "salary" : 45000.55,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("6324026d63e1f2dd2d00f130"),
+        "name" : "Kunal",
+        "age" : 23,
+        "dept" : null,
+        "salary" : 45000.55,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("632402ac63e1f2dd2d00f131"),
+        "name" : "Sunil",
+        "age" : 23,
+        "salary" : 55000.55,
+        "address" : [
+                "Delhi",
+                "Noida"
+        ]
+}
+> db.users.insertOne({name : "Naman",details:{"phone":8766244765,"address":["del
+hi","noida"]}age:23,salary:55000.55,address:["Delhi","Noida"]});
+2022-09-16T10:31:23.090+0530 E  QUERY    [js] uncaught exception: SyntaxError: m
+issing } after property list :
+@(shell):1:91
+> db.users.insertOne({name : "Naman",details:{"phone":8766244765,"address":["del
+hi","noida"]}age:23,));
+2022-09-16T10:31:48.711+0530 E  QUERY    [js] uncaught exception: SyntaxError: m
+issing } after property list :
+@(shell):1:91
+> var doj = Date();
+> doj
+Fri Sep 16 2022 10:32:12 GMT+0530 (India Standard Time)
+> var doj = new Date();
+> doj
+ISODate("2022-09-16T05:02:24.230Z")
+> db.users.insertOne({name:"Naman",doj : doj});
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("632403a063e1f2dd2d00f132")
+}
+> db.users.find().pretty();
+{
+        "_id" : ObjectId("632401e263e1f2dd2d00f12e"),
+        "name" : "Ram",
+        "age" : 20,
+        "salary" : 45000,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("6324021063e1f2dd2d00f12f"),
+        "name" : "Shyam",
+        "age" : 22,
+        "salary" : 45000.55,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("6324026d63e1f2dd2d00f130"),
+        "name" : "Kunal",
+        "age" : 23,
+        "dept" : null,
+        "salary" : 45000.55,
+        "eligible" : true
+}
+{
+        "_id" : ObjectId("632402ac63e1f2dd2d00f131"),
+        "name" : "Sunil",
+        "age" : 23,
+        "salary" : 55000.55,
+        "address" : [
+                "Delhi",
+                "Noida"
+        ]
+}
+{
+        "_id" : ObjectId("632403a063e1f2dd2d00f132"),
+        "name" : "Naman",
+        "doj" : ISODate("2022-09-16T05:02:24.230Z")
+}
+> db.users.insertOne({name:"Naman",doj : doj,dept:"it",min:Minkey,max:maxkey);
+...
+... db.users.find().pretty();
+...
+...
+>
+
+
+
+
+
+

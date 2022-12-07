@@ -1,0 +1,195 @@
+
+> show dbs
+admin            0.000GB
+config           0.000GB
+local            0.000GB
+ncu_db           0.000GB
+ncu_db_practice  0.000GB
+> use ncu_db_practice;
+switched to db ncu_db_practice
+> show collections;
+students
+> db.students.find().pretty();
+{
+        "_id" : ObjectId("62ed3e4aff995b5b62537e7c"),
+        "name" : "Avtar",
+        "age" : 21,
+        "email" : "avtar20csu241@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed3e96ff995b5b62537e7d"),
+        "name" : "Sunil",
+        "age" : 22,
+        "email" : "sunil20csu371@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7e"),
+        "name" : "Harit",
+        "roll_no" : "20csu241",
+        "section" : "FSB",
+        "gender" : "Male",
+        "address" : {
+                "house_no" : "688",
+                "apartment" : "Aujla Apartments",
+                "city" : "Rohini",
+                "state" : "Delhi",
+                "country" : "India"
+        }
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7f"),
+        "name" : "Anshit",
+        "roll_no" : "20csu188",
+        "section" : "FSB",
+        "gender" : "Male",
+        "hobbies" : [
+                "Cricket",
+                "Music"
+        ]
+}
+> db.students.find({name:"Sunil"}).pretty();
+{
+        "_id" : ObjectId("62ed3e96ff995b5b62537e7d"),
+        "name" : "Sunil",
+        "age" : 22,
+        "email" : "sunil20csu371@ncuindia.edu"
+}
+> db.students.find().pretty();
+{
+        "_id" : ObjectId("62ed3e4aff995b5b62537e7c"),
+        "name" : "Avtar",
+        "age" : 21,
+        "email" : "avtar20csu241@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed3e96ff995b5b62537e7d"),
+        "name" : "Sunil",
+        "age" : 22,
+        "email" : "sunil20csu371@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7e"),
+        "name" : "Harit",
+        "roll_no" : "20csu241",
+        "section" : "FSB",
+        "gender" : "Male",
+        "address" : {
+                "house_no" : "688",
+                "apartment" : "Aujla Apartments",
+                "city" : "Rohini",
+                "state" : "Delhi",
+                "country" : "India"
+        }
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7f"),
+        "name" : "Anshit",
+        "roll_no" : "20csu188",
+        "section" : "FSB",
+        "gender" : "Male",
+        "hobbies" : [
+                "Cricket",
+                "Music"
+        ]
+}
+> db.students.findOne().pretty();
+2022-08-05T21:43:51.135+0530 E  QUERY    [js] uncaught exception: TypeError: db.
+students.findOne(...).pretty is not a function :
+@(shell):1:1
+> db.students.findOne();
+{
+        "_id" : ObjectId("62ed3e4aff995b5b62537e7c"),
+        "name" : "Avtar",
+        "age" : 21,
+        "email" : "avtar20csu241@ncuindia.edu"
+}
+> db.students.find({age:22}).pretty();
+{
+        "_id" : ObjectId("62ed3e96ff995b5b62537e7d"),
+        "name" : "Sunil",
+        "age" : 22,
+        "email" : "sunil20csu371@ncuindia.edu"
+}
+> db.students.find().pretty();
+{
+        "_id" : ObjectId("62ed3e4aff995b5b62537e7c"),
+        "name" : "Avtar",
+        "age" : 21,
+        "email" : "avtar20csu241@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed3e96ff995b5b62537e7d"),
+        "name" : "Sunil",
+        "age" : 21,
+        "email" : "sunil20csu371@ncuindia.edu"
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7e"),
+        "name" : "Harit",
+        "roll_no" : "20csu241",
+        "section" : "FSB",
+        "gender" : "Male",
+        "address" : {
+                "house_no" : "688",
+                "apartment" : "Aujla Apartments",
+                "city" : "Delhi",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : "Music"
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7f"),
+        "name" : "Anshit",
+        "roll_no" : "20csu188",
+        "section" : "FSB",
+        "gender" : "Male",
+        "hobbies" : [
+                "Cricket",
+                "Music"
+        ]
+}
+> db.students.find({age:{$gt:12}});
+{ "_id" : ObjectId("62ed3e4aff995b5b62537e7c"), "name" : "Avtar", "age" : 21, "e
+mail" : "avtar20csu241@ncuindia.edu" }
+{ "_id" : ObjectId("62ed3e96ff995b5b62537e7d"), "name" : "Sunil", "age" : 21, "e
+mail" : "sunil20csu371@ncuindia.edu" }
+> db.students.find({hobbies:"Music"});
+{ "_id" : ObjectId("62ed405fff995b5b62537e7e"), "name" : "Harit", "roll_no" : "2
+0csu241", "section" : "FSB", "gender" : "Male", "address" : { "house_no" : "688"
+, "apartment" : "Aujla Apartments", "city" : "Delhi", "state" : "Delhi", "countr
+y" : "India" }, "hobbies" : "Music" }
+{ "_id" : ObjectId("62ed405fff995b5b62537e7f"), "name" : "Anshit", "roll_no" : "
+20csu188", "section" : "FSB", "gender" : "Male", "hobbies" : [ "Cricket", "Music
+" ] }
+> db.students.find({hobbies:"Music"}).preety();
+2022-08-05T22:02:15.833+0530 E  QUERY    [js] uncaught exception: TypeError: db.
+students.find(...).preety is not a function :
+@(shell):1:1
+> db.students.find({hobbies:"Music"}).pretty();
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7e"),
+        "name" : "Harit",
+        "roll_no" : "20csu241",
+        "section" : "FSB",
+        "gender" : "Male",
+        "address" : {
+                "house_no" : "688",
+                "apartment" : "Aujla Apartments",
+                "city" : "Delhi",
+                "state" : "Delhi",
+                "country" : "India"
+        },
+        "hobbies" : "Music"
+}
+{
+        "_id" : ObjectId("62ed405fff995b5b62537e7f"),
+        "name" : "Anshit",
+        "roll_no" : "20csu188",
+        "section" : "FSB",
+        "gender" : "Male",
+        "hobbies" : [
+                "Cricket",
+                "Music"
+        ]
+}

@@ -1,0 +1,18 @@
+https://github.com/brainmentorspvtltd/NCU_MongoDB_22/blob/main/SectionB/file_1b.txt
+
+What is Nosql ? Types of Nosql ? adv vs Disadv
+Nosql vs Mysql
+Nosql vs Rdbms
+schema vs schemaless
+
+Mongodb?
+database creation
+collection creation
+capped Collections
+Datatypes
+Crud Operations
+Sorting
+Filtering
+Grouping
+projection
+Operators
