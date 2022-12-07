@@ -1,0 +1,1 @@
+mongoimport "json_path" -d db_name -c collection_name --jsonArray --drop
